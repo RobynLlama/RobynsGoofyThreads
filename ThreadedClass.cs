@@ -50,17 +50,17 @@ public class ThreadedClass : IDisposable
 
   public void CancelWork()
   {
-    Console.WriteLine($"Cancel requested state: {Result}");
-    //if (ThreadToken.CanBeCanceled)
-    switch (Result)
-    {
-      case ThreadResult.New:
-      case ThreadResult.Running:
-        Console.WriteLine("Cancelling");
-        Result = ThreadResult.Cancelled;
-        ThreadTokenSource.Cancel();
-        break;
-    }
+    //Console.WriteLine($"Cancel requested state: {Result}");
+    if (ThreadToken.CanBeCanceled)
+      switch (Result)
+      {
+        case ThreadResult.New:
+        case ThreadResult.Running:
+          //Console.WriteLine("Cancelling");
+          Result = ThreadResult.Cancelled;
+          ThreadTokenSource.Cancel();
+          break;
+      }
   }
 
   public void Dispose()
